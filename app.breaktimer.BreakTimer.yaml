@@ -1,0 +1,45 @@
+app-id: app.breaktimer.BreakTimer
+branch: stable
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+base: org.electronjs.Electron2.BaseApp
+base-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: run-breaktimer
+separate-locales: false
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=dri
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.ScreenSaver
+
+modules:
+  - name: modeler
+    buildsystem: simple
+    build-commands:
+      - chmod +x BreakTimer.AppImage
+      - ./BreakTimer.AppImage --appimage-extract
+      - mv squashfs-root/* /app/
+      - rm -rf squashfs-root
+      - install -Dm644 /app/usr/share/icons/hicolor/48x48/apps/breaktimer.png
+        /app/share/icons/hicolor/48x48/apps/app.breaktimer.BreakTimer.png
+      - install -Dm644 /app/usr/share/icons/hicolor/256x256/apps/breaktimer.png
+        /app/share/icons/hicolor/256x256/apps/app.breaktimer.BreakTimer.png
+      - install -Dm644 /app/breaktimer.desktop
+        /app/share/applications/app.breaktimer.BreakTimer.desktop
+      - desktop-file-edit --set-icon app.breaktimer.BreakTimer --set-key Exec --set-value
+        'run-breaktimer' /app/share/applications/app.breaktimer.BreakTimer.desktop
+      - install -Dm755 run.sh /app/bin/run-breaktimer
+    sources:
+      - type: file
+        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.0.3/BreakTimer.AppImage
+        sha256: 02a757f747f31725215fb3e50d7d198d224a7806679fdb6667579dc9d728d846
+        dest-filename: BreakTimer.AppImage
+      - type: script
+        dest-filename: run.sh
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - exec zypak-wrapper /app/breaktimer "$@"

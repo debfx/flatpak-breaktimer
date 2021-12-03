@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>app.breaktimer.BreakTimer</id>
+  <provides><id>app.breaktimer.BreakTimer.desktop</id></provides>
+  <launchable type="desktop-id">app.breaktimer.BreakTimer.desktop</launchable>
+  <name>BreakTimer</name>
+  <developer_name>Tom Watson</developer_name>
+  <summary>manage and enforce periodic breaks</summary>
+  <metadata_license>GPL-3.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://breaktimer.app/</url>
+  <description>
+    <p>BreakTimer allows you to set up customizable breaks and will remind you to take them.</p>
+  </description>
+  <releases>
+    <release version="1.0.3" date="2021-11-08"/>
+  </releases>
+</component>
