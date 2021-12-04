@@ -32,12 +32,16 @@ modules:
         /app/share/applications/app.breaktimer.BreakTimer.desktop
       - desktop-file-edit --set-icon app.breaktimer.BreakTimer --set-key Exec --set-value
         'run-breaktimer' /app/share/applications/app.breaktimer.BreakTimer.desktop
+      - install -Dm644 app.breaktimer.BreakTimer.appdata.xml -t /app/share/appdata
       - install -Dm755 run.sh /app/bin/run-breaktimer
+      - rm -rv /app/usr
     sources:
       - type: file
         url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.0.3/BreakTimer.AppImage
         sha256: 02a757f747f31725215fb3e50d7d198d224a7806679fdb6667579dc9d728d846
         dest-filename: BreakTimer.AppImage
+      - type: file
+        path: app.breaktimer.BreakTimer.appdata.xml
       - type: script
         dest-filename: run.sh
         commands:
