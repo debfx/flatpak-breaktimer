@@ -37,8 +37,8 @@ modules:
       - rm -rv /app/usr
     sources:
       - type: file
-        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.0.3/BreakTimer.AppImage
-        sha256: 02a757f747f31725215fb3e50d7d198d224a7806679fdb6667579dc9d728d846
+        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.2.0/BreakTimer.AppImage
+        sha256: 6e9739109ff919df74f0eafe03bc2387350aded69401c6f113af5f994198157b
         dest-filename: BreakTimer.AppImage
       - type: file
         path: app.breaktimer.BreakTimer.appdata.xml
