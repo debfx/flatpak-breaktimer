@@ -32,7 +32,7 @@ modules:
         /app/share/applications/app.breaktimer.BreakTimer.desktop
       - desktop-file-edit --set-icon app.breaktimer.BreakTimer --set-key Exec --set-value
         'run-breaktimer' /app/share/applications/app.breaktimer.BreakTimer.desktop
-      - install -Dm644 app.breaktimer.BreakTimer.appdata.xml -t /app/share/appdata
+      - install -Dm644 app.breaktimer.BreakTimer.metainfo.xml -t /app/share/metainfo
       - install -Dm755 run.sh /app/bin/run-breaktimer
       - rm -rv /app/usr
     sources:
@@ -41,7 +41,7 @@ modules:
         sha256: 6e9739109ff919df74f0eafe03bc2387350aded69401c6f113af5f994198157b
         dest-filename: BreakTimer.AppImage
       - type: file
-        path: app.breaktimer.BreakTimer.appdata.xml
+        path: app.breaktimer.BreakTimer.metainfo.xml
       - type: script
         dest-filename: run.sh
         commands:
