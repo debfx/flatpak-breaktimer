@@ -6,7 +6,7 @@
   <name>BreakTimer</name>
   <developer_name>Tom Watson</developer_name>
   <summary>manage and enforce periodic breaks</summary>
-  <metadata_license>GPL-3.0</metadata_license>
+  <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <url type="homepage">https://breaktimer.app/</url>
   <description>
