@@ -24,7 +24,7 @@ modules:
       - chmod +x BreakTimer.AppImage
       - ./BreakTimer.AppImage --appimage-extract
       - mv squashfs-root/* /app/
-      - rm -rf squashfs-root
+      - rm -rf BreakTimer.AppImage squashfs-root
       - install -Dm644 /app/usr/share/icons/hicolor/48x48/apps/breaktimer.png
         /app/share/icons/hicolor/48x48/apps/app.breaktimer.BreakTimer.png
       - install -Dm644 /app/usr/share/icons/hicolor/256x256/apps/breaktimer.png
@@ -38,8 +38,8 @@ modules:
       - rm -rv /app/usr
     sources:
       - type: file
-        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.2.0/BreakTimer.AppImage
-        sha256: 6e9739109ff919df74f0eafe03bc2387350aded69401c6f113af5f994198157b
+        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.3.2/BreakTimer.AppImage
+        sha256: 3bd0b0842ff5a3de874477656454ba4a284c1f749031a53b326e53bfb14cec8e
         dest-filename: BreakTimer.AppImage
       - type: file
         path: app.breaktimer.BreakTimer.metainfo.xml
