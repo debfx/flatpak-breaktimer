@@ -21,26 +21,25 @@ modules:
   - name: breaktimer
     buildsystem: simple
     build-commands:
-      - chmod +x BreakTimer.AppImage
-      - ./BreakTimer.AppImage --appimage-extract
-      - mv squashfs-root/* /app/
-      - rm -rf BreakTimer.AppImage squashfs-root
-      - install -Dm644 /app/usr/share/icons/hicolor/48x48/apps/breaktimer.png
+      - ar -x  BreakTimer.deb
+      - tar -xf data.tar.*
+      - mv opt/BreakTimer/* /app/
+      - install -Dm644 usr/share/icons/hicolor/48x48/apps/breaktimer.png
         /app/share/icons/hicolor/48x48/apps/app.breaktimer.BreakTimer.png
-      - install -Dm644 /app/usr/share/icons/hicolor/256x256/apps/breaktimer.png
+      - install -Dm644 usr/share/icons/hicolor/256x256/apps/breaktimer.png
         /app/share/icons/hicolor/256x256/apps/app.breaktimer.BreakTimer.png
-      - install -Dm644 /app/breaktimer.desktop
+      - install -Dm644 usr/share/applications/breaktimer.desktop
         /app/share/applications/app.breaktimer.BreakTimer.desktop
+      - rm -rfv BreakTimer.deb control.tar.* data.tar.* debian-binary opt usr
       - desktop-file-edit --set-icon app.breaktimer.BreakTimer --set-key Exec --set-value
         'run-breaktimer' /app/share/applications/app.breaktimer.BreakTimer.desktop
       - install -Dm644 app.breaktimer.BreakTimer.metainfo.xml -t /app/share/metainfo
       - install -Dm755 run.sh /app/bin/run-breaktimer
-      - rm -rv /app/usr
     sources:
       - type: file
-        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.3.2/BreakTimer.AppImage
-        sha256: 3bd0b0842ff5a3de874477656454ba4a284c1f749031a53b326e53bfb14cec8e
-        dest-filename: BreakTimer.AppImage
+        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.3.2/BreakTimer.deb
+        sha256: 57052b6f3b203b7ac8920d3d26dce89f10a8eed232089452a49d8c115acf47fa
+        dest-filename: BreakTimer.deb
       - type: file
         path: app.breaktimer.BreakTimer.metainfo.xml
       - type: script
