@@ -24,6 +24,8 @@ modules:
       - ar -x  BreakTimer.deb
       - tar -xf data.tar.*
       - mv opt/BreakTimer/* /app/
+      # disable the auto-updater
+      - rm -v /app/resources/package-type
       - install -Dm644 usr/share/icons/hicolor/48x48/apps/breaktimer.png
         /app/share/icons/hicolor/48x48/apps/app.breaktimer.BreakTimer.png
       - install -Dm644 usr/share/icons/hicolor/256x256/apps/breaktimer.png
