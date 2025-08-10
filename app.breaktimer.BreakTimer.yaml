@@ -5,6 +5,8 @@ runtime-version: '24.08'
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node22
 command: run-breaktimer
 separate-locales: false
 finish-args:
@@ -19,30 +21,37 @@ finish-args:
 modules:
   - name: breaktimer
     buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/node22/bin
+      env:
+        XDG_CACHE_HOME: /run/build/breaktimer/flatpak-node/cache
+        npm_config_cache: /run/build/breaktimer/flatpak-node/npm-cache
+        npm_config_nodedir: /usr/lib/sdk/node22
+        npm_config_offline: 'true'
     build-commands:
-      - ar -x  BreakTimer.deb
-      - tar -xf data.tar.*
-      - mv opt/BreakTimer/* /app/
-      # disable the auto-updater
-      - rm -v /app/resources/package-type
-      - install -Dm644 usr/share/icons/hicolor/256x256/apps/breaktimer.png
+      - jq '.build.linux.target="dir"' <<< $(<package.json) > package.json
+      - npm install
+      - |
+        . flatpak-node/electron-builder-arch-args.sh
+        npm run package-linux -- $ELECTRON_BUILDER_ARCH_ARGS
+      - cp -a release/linux*unpacked /app/main
+      - install -Dm644 resources/icon.png
         /app/share/icons/hicolor/256x256/apps/app.breaktimer.BreakTimer.png
-      - install -Dm644 usr/share/applications/breaktimer.desktop
-        /app/share/applications/app.breaktimer.BreakTimer.desktop
-      - rm -rfv BreakTimer.deb control.tar.* data.tar.* debian-binary opt usr
-      - desktop-file-edit --set-icon app.breaktimer.BreakTimer --set-key Exec --set-value
-        'run-breaktimer' /app/share/applications/app.breaktimer.BreakTimer.desktop
+      - install -Dm644 app.breaktimer.BreakTimer.desktop -t /app/share/applications
       - install -Dm644 app.breaktimer.BreakTimer.metainfo.xml -t /app/share/metainfo
       - install -Dm755 run.sh /app/bin/run-breaktimer
     sources:
-      - type: file
-        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v2.0.0/BreakTimer.deb
-        sha256: 6812f38b9cdecd3c670d58036e5884680628477a9897e452c010f362f4d443a2
-        dest-filename: BreakTimer.deb
+      - type: git
+        url: https://github.com/tom-james-watson/breaktimer-app.git
+        tag: v2.0.0
+        commit: f8b57e14a570843fceae020dd96a22d0cd92b28f
+      - generated-sources.json
       - type: file
         path: app.breaktimer.BreakTimer.metainfo.xml
+      - type: file
+        path: app.breaktimer.BreakTimer.desktop
       - type: script
         dest-filename: run.sh
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
-          - exec zypak-wrapper /app/breaktimer "$@"
+          - exec zypak-wrapper /app/main/breaktimer "$@"

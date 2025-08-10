@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=BreakTimer
+Exec=run-breaktimer
+Terminal=false
+Type=Application
+Icon=app.breaktimer.BreakTimer
+StartupWMClass=BreakTimer
+Comment=Manage periodic breaks
+Categories=Utility;
