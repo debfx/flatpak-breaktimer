@@ -25,8 +25,6 @@ modules:
       - mv opt/BreakTimer/* /app/
       # disable the auto-updater
       - rm -v /app/resources/package-type
-      - install -Dm644 usr/share/icons/hicolor/48x48/apps/breaktimer.png
-        /app/share/icons/hicolor/48x48/apps/app.breaktimer.BreakTimer.png
       - install -Dm644 usr/share/icons/hicolor/256x256/apps/breaktimer.png
         /app/share/icons/hicolor/256x256/apps/app.breaktimer.BreakTimer.png
       - install -Dm644 usr/share/applications/breaktimer.desktop
@@ -38,8 +36,8 @@ modules:
       - install -Dm755 run.sh /app/bin/run-breaktimer
     sources:
       - type: file
-        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v1.3.2/BreakTimer.deb
-        sha256: 57052b6f3b203b7ac8920d3d26dce89f10a8eed232089452a49d8c115acf47fa
+        url: https://github.com/tom-james-watson/breaktimer-app/releases/download/v2.0.0/BreakTimer.deb
+        sha256: 6812f38b9cdecd3c670d58036e5884680628477a9897e452c010f362f4d443a2
         dest-filename: BreakTimer.deb
       - type: file
         path: app.breaktimer.BreakTimer.metainfo.xml
