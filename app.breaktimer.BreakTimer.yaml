@@ -44,8 +44,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/tom-james-watson/breaktimer-app.git
-        tag: v2.0.0
-        commit: f8b57e14a570843fceae020dd96a22d0cd92b28f
+        tag: v2.0.1
+        commit: a1ed7fe69897b26f499bff8bfff5765226f34f3e
       - generated-sources.json
       - type: file
         path: app.breaktimer.BreakTimer.metainfo.xml
